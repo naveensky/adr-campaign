@@ -48,6 +48,16 @@ class HomeController extends BaseController
 
 
                 $campaignFiles = $data['campaignFiles'];
+                $isFileUploaded = false;
+                foreach ($campaignFiles as $file) {
+                    if (!is_null($file)) {
+                        $isFileUploaded = true;
+                        break;
+                    }
+                }
+                if (!$isFileUploaded) {
+                    return Redirect::to('/')->with('message', "Atleast one file is required");
+                }
                 $name = empty($data['name']) ? '' : $data['name'];
                 $email = empty($data['email']) ? '' : $data['email'];
                 $mobile = empty($data['mobile']) ? '' : $data['mobile'];
