@@ -27,7 +27,7 @@ class Init extends Migration {
             $table->text('address', 1000);
             $table->string('city', 1000);
             $table->string('state', 1000);
-            $table->enum('category', array("music", "video"));
+            $table->string('category',1000);
             $table->timestamps();
         });
 

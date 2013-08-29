@@ -1,0 +1,130 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: hitanshu
+ * Date: 15/4/13
+ * Time: 4:58 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
+class TestRepository
+{
+    private $contentTagRepo;
+
+
+    public function __construct()
+    {
+        $this->contentTagRepo = new ContentTagRepository();
+
+    }
+
+    //get Test Questions for particular type of test
+    public function getTests($BoardId, $classLevelId, $subjectId, $chapterId, $testType)
+    {
+        $tagIds = $this->contentTagRepo->getTagIds($BoardId, $classLevelId, $subjectId, $chapterId);
+        try {
+            $tests = Test::with('questionBanks.options')->where('testTypes', '=', $testType)->whereIn('tagId', $tagIds)->get();
+        } catch (Exception $e) {
+            Log::error($e);
+            return array();
+        }
+        return $tests;
+    }
+
+    public function getTestsByContentTag($tagId, $testType, DifficultyLevel $level)
+    {
+        try {
+            $difficultyLevelLimit = Util::getLevelLimit($level);
+            return Test::where('tagId', '=', $tagId)->where('testTypes', '=', $testType)->where('DifficultyLevel', '>=', $difficultyLevelLimit['lower'])->where('DifficultyLevel', '>=', $difficultyLevelLimit['upper'])->get();
+        } catch (Exception $e) {
+            Log::error($e);
+            return array();
+        }
+    }
+
+
+    public function getAllTopicTestsByTestCodeLevelAndTestType($code, $testType, $level)
+    {
+        $testCodeArrays = array();
+        try {
+            $difficultyLevelLimit = Util::getLevelLimit($level);
+            $tests = DB::table('tests')->where("tagId", "=", function ($query) use ($code) {
+                $query->select('tagId')->from('tests')->where('code', '=', $code);
+            })->where('testTypes', '=', $testType)->where('difficultyLevel', '>=', $difficultyLevelLimit['lower'])->where('difficultyLevel', '<=', $difficultyLevelLimit['upper'])->get();
+
+            foreach ($tests as $test) {
+                $testCodeArrays[] = $test->code;
+            }
+        } catch (Exception $e) {
+            Log::error($e);
+            throw $e;
+        }
+        return $testCodeArrays;
+    }
+
+    public function getTest($testCode)
+    {
+        try {
+            $tests = Test::with('questionBanks.options')->where('code', $testCode)->first();
+        } catch (Exception $e) {
+            Log::error($e);
+            return array();
+        }
+        return $tests;
+    }
+
+    public function searchTest($searchValue)
+    {
+        try {
+            $tests = Test::where('title', '~*', ".*$searchValue.*")->or_where('summary', '~*', ".*$searchValue.*")->get();
+        } catch (Exception $e) {
+            Log::exception($e);
+            return false;
+        }
+        return $tests;
+    }
+
+    public function addTest($title, $summary, $displayOrder, $difficultyLevel, $code, $testType, $tagId, $questionIds)
+    {
+
+        $test = new Test();
+        $test->title = $title;
+        $test->summary = $summary;
+        $test->displayOrder = $displayOrder;
+        $test->difficultyLevel = $difficultyLevel;
+        $test->code = $code;
+        $test->testTypes = $testType;
+        $test->tagId = $tagId;
+        try {
+            $test->save();
+            $test->questionBanks()->sync($questionIds);
+            return $test;
+        } catch (Exception $e) {
+            Log::error($e);
+            return false;
+        }
+    }
+
+    public function getTestForTagId($tagId)
+    {
+        try {
+            $test = Test::where('tagId', $tagId)->first();
+        } catch (Exception $e) {
+            Log::error($e);
+            return false;
+        }
+        return $test;
+    }
+
+    public function countTestForTagIds($tagId)
+    {
+        try {
+            $test = Test::where('tagId', $tagId)->count();
+        } catch (Exception $e) {
+            Log::error($e);
+            return false;
+        }
+        return $test;
+    }
+
+}

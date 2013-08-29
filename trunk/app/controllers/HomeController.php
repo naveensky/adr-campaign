@@ -40,11 +40,13 @@ class HomeController extends BaseController
         $rules = array(
             'name' => 'Required',
             'email' => 'Required',
-            'mobile' => 'Required'
+            'mobile' => 'Required',
         );
         $v = Validator::make($data, $rules);
         if ($v->passes()) {
             try {
+
+
                 $campaignFiles = $data['campaignFiles'];
                 $name = empty($data['name']) ? '' : $data['name'];
                 $email = empty($data['email']) ? '' : $data['email'];
@@ -52,15 +54,15 @@ class HomeController extends BaseController
                 $address = empty($data['address']) ? '' : $data['address'];
                 $city = empty($data['city']) ? '' : $data['city'];
                 $state = empty($data['state']) ? '' : $data['state'];
-                $category = empty($data['category']) ? 1 : $data['category'];
+                $category = empty($data['category']) ? "None" : $data['category'];
                 $this->campaignService->addCampaign($name, $email, $mobile, $address, $city, $state, $category, $campaignFiles);
-
+                return Redirect::to('/')->with('message', "Thank you for submitting your entry. Please see your email for more details.");
             } catch (Exception $e) {
                 return Redirect::to('/')->with('message', "Internal Server Error");
             }
         } else {
 
-            return Redirect::to('/')->withErrors($v->getMessageBag())->withInput($data);
+            return Redirect::to('/')->with('message', "Please fill required fields");
         }
 
     }
