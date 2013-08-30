@@ -8,7 +8,29 @@
     <meta name="fragment" content="!"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <style type="text/css">
+        .progress {
+            position: relative;
+            width: 400px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 3px;
+        }
 
+        .bar {
+            background-color: #B4F5B4;
+            width: 0%;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .percent {
+            position: absolute;
+            display: inline-block;
+            top: 3px;
+            left: 48%;
+        }
+    </style>
     <link rel="stylesheet" type="text/css" href="<% URL::to('theme/style/jquery.qtip.css') %>"/>
     <link rel="stylesheet" type="text/css" href="<% URL::to('theme/style/jquery-ui/jquery-ui.css') %>"/>
     <link rel="stylesheet" type="text/css" href="<% URL::to('theme/style/supersized/supersized.css') %>"/>
@@ -47,7 +69,7 @@
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.infieldlabel.min.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.carouFredSel.packed.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.supersized.shutter.min.js') %>"></script>
-
+    <!--    <script src="http://malsup.github.com/jquery.form.js"></script>-->
 
     <script type="text/javascript" src="<% URL::to('theme/script/script.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/main.js') %>"></script>
@@ -68,7 +90,7 @@
 
         <!-- Logo -->
         <div class="layout-50p-left clear-fix">
-            <a style="background: none" href="#" class="header-logo"><img
+            <a style="background: none" href="http://adrindia.org/" class="header-logo" target="_blank"><img
                     src="<% URL::to('img/logo/adr_left_logo.png') %>" alt=""></a>
         </div>
         <!-- /Logo -->
@@ -76,7 +98,8 @@
         <div class="layout-50p-right">
 
             <div style="background: none;padding-right: 0px" class="header-phone">
-                <a href="#"><img src="<% URL::to('img/logo/right_logo.png') %>" alt=""></a>
+                <a href="http://myneta.info/" target="_blank"><img src="<% URL::to('img/logo/right_logo.png') %>"
+                                                                   alt=""></a>
             </div>
 
         </div>
@@ -96,6 +119,7 @@
 <li id="message" class="text-center clear-fix">
     <h4>
         <% Session::get('message') %>
+        <?php Session::forget('message');?>
     </h4>
 </li>
 <!--end message-->
@@ -320,7 +344,7 @@
     <!-- Accordion -->
     <div class="nostalgia-accordion clear-fix">
 
-        <h3><a href="#">Theme</a></h3>
+        <h3><a aria-selected="true" href="#">Theme</a></h3>
 
         <div style="padding-left: 20px;padding-top: 20px">
             <h4>Let’s reclaim our democracy, let’s reclaim our country</h4>
@@ -456,7 +480,7 @@
                     <li>
                         <span>5</span>
 
-                        <p>By entering the contest, the winner grants National Election Watch and Association for
+                        <p>By entering the contest, the participant grants National Election Watch and Association for
                             Democratic Reforms exclusive rights to the winning creative input for use in any
                             format.</p>
 
@@ -498,7 +522,7 @@
             <div class="contact-details-wrapper">
 
                 <!-- Contact form -->
-                <form name="contact-form" id="contact-form" method="post" enctype="multipart/form-data"
+                <form name="contact-form" id="campaignForm" method="post" enctype="multipart/form-data"
                       action="<% URL::to('/campaign/add') %>" class="clear-fix">
 
                     <div class="clear-fix">
@@ -522,17 +546,51 @@
                                 <textarea name="address" id="address" rows="1"
                                           cols="1"></textarea>
                             </li>
-                            <li class="clear-fix block">
-                                <label for="state">Your State</label>
-                                <input type="text" name="state" id="state" value=""/>
+                            <li class="clear-fix block" style="width: 100%">
+                                <select name="state" style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
+                                    <option value="" selected="">Select State</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="NCT-Delhi">NCT-Delhi</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Orissa">Orissa</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+
                             </li>
-                            <li class="clear-fix block">
-                                <label for="city">Your City</label>
-                                <input type="text" name="city" id="city" value=""/>
-                            </li>
+
                             <li class="clear-fix block" style="width: 100%">
                                 <!--                                <label for="contact-form-mail">Your e-mail</label>-->
-                                <select name="category" style="width: 100%">
+                                <select name="category" style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
                                     <option value="">Select Category</option>
                                     <option value="Slogans">Slogans</option>
                                     <option value="Videos">Videos</option>
@@ -550,7 +608,7 @@
 
 
                             </li>
-                            <li class="clear-fix">
+                            <li class="clear-fix" style="padding-bottom: 5px;">
                                 <!--                                <button class="button-black" id="addMore" data-count=1 type="button">Add More Files</button>-->
                                 <a href="#" class="button-black add_more_button" id="addMore"
                                    data-count=1 type="button">Add More
@@ -558,10 +616,24 @@
 
                             </li>
                             <li class="clear-fix block" style="width: 100%">
+                                <% Form::captcha()%>
+                            </li>
+                            <li class="clear-fix block" style="width: 100%">
                                 <input type="submit" class="button" style="width: 100%"
                                        value="Send"/>
                             </li>
 
+                            <li class="clear-fix block" style="width: 100%">
+                                <div style="display: none;width: 100%" class="progress">
+                                    <div class="bar"></div>
+                                    <div class="percent">0%</div>
+                                </div>
+                            </li>
+                            <li class="clear-fix block" style="width: 100%">
+                                <div style="display: none;width: 100%" id="errorMessage">
+
+                                </div>
+                            </li>
                         </ul>
 
                     </div>
@@ -596,7 +668,7 @@
 
             <p style="padding-bottom: 0px">Helpline No. : 91-80103-94248</p>
 
-            <p style="padding-bottom: 0px;padding-top:0px">Or Email us at: <a href="mailto:adr@adrindia.org">adr@adrindia.org</a>
+            <p style="padding-bottom: 0px;padding-top:0px">Or Email us at: <a href="mailto:campaign@adrindia.org">campaign@adrindia.org</a>
             </p>
 
         </div>
@@ -628,7 +700,7 @@
         <ul class="no-list social-list clear-fix">
             <li><a href="http://twitter.com/#!/adrspeaks" target="_blank" class="social-list-twitter"></a></li>
             <li><a href="http://www.facebook.com/adr.new" target="_blank" class="social-list-facebook"></a></li>
-            <li><a href="http://www.youtube.com/user/adrspeaks" class="social-list-googleplus"></a></li>
+            <li><a href="http://www.youtube.com/user/adrspeaks" target="_blank" class="social-list-googleplus"></a></li>
         </ul>
         <!-- /Social icons list -->
 
@@ -652,7 +724,8 @@
                     <li class="clear-fix block">
                         <label for="newsletter-form-mail">Your e-mail</label>
                         <input name="email" type="text" id="newsletter-form-mail" value=""/>
-                        <input type="submit" id="newsletter-form-send" name="newsletter-form-send" class="button"
+                        <input style="height: 100%" type="submit" id="newsletter-form-send" name="newsletter-form-send"
+                               class="button"
                                value="Join"/>
                     </li>
 
@@ -695,7 +768,51 @@
             $('#addFilesDiv').append(text);
         });
 
-
+        var bar = $('.bar');
+        var percent = $('.percent');
+        var status = $('#status');
+        //svar progressDiv = $('.progress')
+//        $('#campaignForm').ajaxForm({
+//
+//            beforeSend: function () {
+//                if ($('.file_input').val().length)
+//                    progressDiv.show();
+//                status.empty();
+//                var percentVal = '0%';
+//                bar.width(percentVal)
+//                percent.html(percentVal);
+//            },
+//            uploadProgress: function (event, position, total, percentComplete) {
+//                var percentVal = percentComplete + '%';
+//                bar.width(percentVal)
+//                percent.html(percentVal);
+//            },
+//            success: function (data) {
+//                if (data.status == true) {
+//                    window.location.reload();
+//                } else {
+//                    var errorMessageDiv = $('#errorMessage');
+//                    errorMessageDiv.html('<p>' + data.message + '</p>')
+//                    errorMessageDiv.show();
+//                    setTimeout(function () {
+//                        errorMessageDiv.hide();
+//                    }, 3000);
+//                }
+////                alert(data);
+////                var percentVal = '100%';
+////                bar.width(percentVal)
+////                percent.html(percentVal);
+//            },
+//            complete: function (data) {
+////                if (data.status == true) {
+////                    window.location.reload();
+////                } else {
+////                    var messageUl = $('#message');
+////                    messageUl.html('<h4>' + data.message + '</h4>')
+////                    messageUl.show();
+////                }
+//            }
+//        });
     });
 
 

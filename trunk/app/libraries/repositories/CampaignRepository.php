@@ -30,17 +30,20 @@ class CampaignRepository
             $campaignFileService = $this->campaignFilesService;
             $insertedCampaign = DB::transaction(function () use ($campaign, $files, $campaignFileService) {
                 $campaign->save();
+                $date = new DateTime();
+                $dateString = $date->format('Y-m');
+                $registrationNumber = preg_replace('#\-#', '', $dateString) . str_pad($campaign->id, 6, "0", STR_PAD_LEFT);
+
+                $campaign->registrationNumber = $registrationNumber;
+                $campaign->save();
                 foreach ($files as $file) {
                     try {
                         $campaignFileService->addCampaignFiles($campaign->id, $file);
                     } catch (Exception $e) {
                         //consuming exception
                     }
-
                 }
-
             });
-
         } catch (Exception $e) {
             throw $e;
         }

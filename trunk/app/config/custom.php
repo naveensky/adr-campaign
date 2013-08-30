@@ -7,4 +7,4 @@
  * To change this template use File | Settings | File Templates.
  */
 
-return array('uploadPath' => public_path() . "/uploads"  );
+return array('uploadPath' => public_path() . "/uploads" ,'emailSubject'=>"Test" );

@@ -15,6 +15,7 @@ return array(
     'CampaignRepository' => $baseDir . '/app/libraries/repositories/CampaignRepository.php',
     'CampaignService' => $baseDir . '/app/libraries/services/CampaignService.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
+    'EmailService' => $baseDir . '/app/libraries/services/EmailService.php',
     'ErrorController' => $baseDir . '/app/controllers/ErrorController.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',

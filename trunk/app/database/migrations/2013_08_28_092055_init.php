@@ -2,15 +2,16 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class Init extends Migration {
+class Init extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         //create user table
         Schema::create('users', function ($table) {
             $table->increments('id')->index()->unsigned();
@@ -22,25 +23,25 @@ class Init extends Migration {
         Schema::create('campaigns', function ($table) {
             $table->increments('id')->index()->unsigned();
             $table->string('name', 1000);
+            $table->string('registrationNumber', 100)->nullable();
             $table->string('email', 1000);
             $table->string('mobile', 1000);
             $table->text('address', 1000);
             $table->string('city', 1000);
             $table->string('state', 1000);
-            $table->string('category',1000);
+            $table->string('category', 1000);
             $table->timestamps();
         });
 
 
+        Schema::create('campaignFiles', function ($table) {
+            $table->increments('id')->index()->unsigned();
+            $table->integer('campaignId')->index()->unsigned();
+            $table->foreign('campaignId')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('path', 2000);
 
-         Schema::create('campaignFiles', function ($table) {
-             $table->increments('id')->index()->unsigned();
-             $table->integer('campaignId')->index()->unsigned();
-             $table->foreign('campaignId')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
-             $table->string('path',2000);
-
-             $table->timestamps();
-         });
+            $table->timestamps();
+        });
 
 
         DB::table('users')->insert(
@@ -50,14 +51,14 @@ class Init extends Migration {
 
     }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
         Schema::table('campaignFiles', function ($table) {
             $table->dropForeign('campaignfiles_campaignid_foreign');
         });
@@ -65,6 +66,6 @@ class Init extends Migration {
         Schema::drop('campaigns');
         Schema::drop('campaignFiles');
 
-	}
+    }
 
 }

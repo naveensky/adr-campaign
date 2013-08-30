@@ -272,7 +272,7 @@ a.section-list-item-next:hover,
 .image-list-carousel-navigation-prev:hover,
 .image-list-carousel-navigation-next:hover,
 .contact-details-wrapper .contact-details #contact-details-button:hover {
-    background-color: #dd0000;
+    background-color: #9B0A0A;
 }
 
 a.button-black,
@@ -1023,19 +1023,20 @@ ul.social-list li {
 }
 
 ul.social-list li a {
-    width: 39px;
-    height: 39px;
+    width: 36px;
+    height: 36px;
     display: block;
     background-repeat: no-repeat;
     background-position: 0px 0px;
 }
 
 ul.social-list li a:hover {
-    background-position: 0px -39px;
+    background-position: 0px -36px;
 }
 
 ul.social-list li a.social-list-twitter {
     background-image: url('../image/icon/icon-3/icon_social_twitter.png');
+    padding-left: 3px;
 }
 
 ul.social-list li a.social-list-facebook {
@@ -1047,13 +1048,26 @@ ul.social-list li a.social-list-googleplus {
 }
 
 ul.social-list li a.social-list-googleplus:hover {
-    width: 39px;
-    height: 39px;
+    width: 36px;
+    height: 36px;
     display: block;
     background-repeat: no-repeat;
     background-position: 0px 0px;
 }
-
+ul.social-list li a.social-list-twitter:hover {
+    width: 36px;
+    height: 36px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+ul.social-list li a.social-list-facebook:hover {
+    width: 36px;
+    height: 36px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
 /******************************************************************************/
 /*  Latest tweets															  */
 /******************************************************************************/

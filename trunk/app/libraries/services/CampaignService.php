@@ -34,13 +34,14 @@ class CampaignService
                     $isFileMoved = $file->move(Config::get('custom.uploadPath'), $fileName);
                     $filePaths[] = 'uploads/' . $fileName;
                 }
-                $this->campaignRepo->addCampaign($name, $email, $mobile, $address, $city, $state, $category, $filePaths);
-                return $fileUploadingErrors;
+
             } catch (Exception $e) {
                 $fileUploadingErrors[] = "Error while uploading file: " . $file->getClientOriginalName();
             }
 
         }
+        $this->campaignRepo->addCampaign($name, $email, $mobile, $address, $city, $state, $category, $filePaths);
+        return $fileUploadingErrors;
     }
 
 }
