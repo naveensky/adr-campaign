@@ -15,14 +15,16 @@
 Route::get("/", array('as' => 'home', 'uses' => 'HomeController@getIndex'));
 Route::controller('campaign', 'HomeController');
 Route::get('/error', 'ErrorController@getIndex');
-Route::get('/test', function () {
-    $date = new DateTime();
-    $dateString = $date->format('Y-m');
-    $registrationNumber = preg_replace('#\-#', '', $dateString) . str_pad(1, 10, "0", STR_PAD_LEFT);
-    var_dump($registrationNumber);
+
+Route::get('/twitter', function () {
+
+    $tweets = array('Election Commission to follow SC order on Convicted MPs/MLAs in upcoming assembly elections <a href="http://zeenews.india.com/news/nation/election-commission-to-follow-supreme-court-s-judgement-cec_873094.html">http://zeenews.india.com/news/nation/...</a>',
+        'Bihar MLAs, MLCs under scanner for faking travel bills- <a href="http://articles.timesofindia.indiatimes.com/2013-08-28/india/41537271_1_travel-bills-bihar-mlas-patna-jn">http://articles.timesofindia.indiatimes.com/.... </a>',
+        'Haryana Govt. spends 8 Crore every year alone on pensions of former legislators and their widows- <a href="http://www.hindustantimes.com/India-news/Haryana/Bring-political-parties-under-ambit-of-transparency/Article1-1112765.aspx"> http://www.hindustantimes.com/India-news/.…</a>');
+    echo json_encode($tweets);
+    exit;
 });
 
-Route::get('/testemail', function () {
-    $emailService = new EmailService();
-    $emailService->sendEmail(array('userName' => 'Keshav', 'userEmail' => 'kashta@greenapplesolutions.com'));
+Route::get('/file', function () {
+    return View::make('home.homebcp');
 });

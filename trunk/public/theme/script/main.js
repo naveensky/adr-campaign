@@ -67,11 +67,11 @@ $(document).ready(function () {
     /*	Twitter																  */
     /**************************************************************************/
 
-    $.getJSON('theme/plugin/twitter-user-timeline/twitter-user-timeline.php', function (data) {
+    $.getJSON('/twitter', function (data) {
         if (data.length) {
             var list = $('<ul>');
             $(data).each(function (index, value) {
-                list.append($('<li>').append($('<p>').html(linkify(value.text))));
+                list.append($('<li>').append($('<p>').html(value)));
             });
 
             $('#latest-tweets').append(list);

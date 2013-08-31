@@ -4,7 +4,8 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"laravel/framework": "4.0.*",
-        "greggilbert/recaptcha": "dev-master"
+        "greggilbert/recaptcha": "dev-master",
+        "barryvdh/laravel-vendor-cleanup": "1.*"
 	},
 	"autoload": {
 		"classmap": [

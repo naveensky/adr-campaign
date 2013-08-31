@@ -1,12 +1,19 @@
 <?php
-		session_start();
-		
-		require_once('config.php');
-		require_once('../../include/twitteroauth/twitteroauth/twitteroauth.php');
+try {
+    $url = URL::to('twitter/tweets');
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, '6');
+    $result = curl_exec($ch);
+    $error = curl_error($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    echo $result;
 
-		$connection=new TwitterOAuth(TWITTER_USER_TIMELINE_CONSUMER_KEY,TWITTER_USER_TIMELINE_CONSUMER_SECRET,TWITTER_USER_TIMELINE_ACCESS_TOKEN,TWITTER_USER_TIMELINE_ACCESS_TOKEN_SECRET);
+} catch (Exception $e) {
 
-		$tweets=$connection->get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='.TWITTER_USER_TIMELINE_USER.'&count='.TWITTER_USER_TIMELINE_COUNT);
+}
 
-		echo json_encode($tweets);
 ?>

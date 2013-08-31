@@ -22,6 +22,7 @@ return array(
     'Init' => $baseDir . '/app/database/migrations/2013_08_28_092055_init.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
+    'TwitterController' => $baseDir . '/app/controllers/TwitterController.php',
     'User' => $baseDir . '/app/models/User.php',
     'Util' => $baseDir . '/app/libraries/Util.php',
 );

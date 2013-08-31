@@ -119,6 +119,6 @@
 <div id="addFileInput" style="display: none">
     <br/>
 
-    <input type="file" id="campaignFiles" name="campaignFiles[]" class="required" accept="video/*,audio/*">
+    <input type="file" id="campaignFiles" name="campaignFiles[]"  accept="video/*,audio/*">
 </div>
 @stop

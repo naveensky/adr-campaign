@@ -57,12 +57,16 @@ class HomeController extends BaseController
                     }
                 }
                 if (!$isFileUploaded) {
+                    if (isset($data['campaignFiles']))
+                        unset($data['campaignFiles']);
 //                    return Response::json(array('status' => false, 'message' => "Atleast one file is required"));
-                    return Redirect::to('/')->with('message', "Atleast one file is required");
+                    return Redirect::to('/#submitEntry')->with('errorMessage', "Atleast one file is required")->withInput($data)->with('status');
                 }
                 if (empty($data['name']) || empty($data['email']) || empty($data['mobile'])) {
-                    return Redirect::to('/')->with('message', "Please fill required fields");
-//                    return Response::json(array('status' => false, 'message' => "Please fill required fields"));
+                    if (isset($data['campaignFiles']))
+                        unset($data['campaignFiles']);
+//
+                    return Redirect::to('/#submitEntry')->with('errorMessage', "Please fill required fields")->withInput($data);
                 }
 
                 $address = empty($data['address']) ? '' : $data['address'];
@@ -72,17 +76,18 @@ class HomeController extends BaseController
                 $this->campaignService->addCampaign($data['name'], $data['email'], $data['mobile'], $address, $city, $state, $category, $campaignFiles);
                 $this->emailService->sendEmail(array('userName' => $data['name'], 'userEmail' => $data['email']));
                 return Redirect::to('/')->with('message', "Thank you for submitting your entry. Please see your email for more details.");
-//                Session::put('message', 'Thank you for submitting your entry. Please see your email for more details.');
-//                return Response::json(array('status' => true, 'message' => 'Thank you for submitting your entry. Please see your email for more details.'));
 
             } catch (Exception $e) {
-                return Redirect::to('/')->with('message', "Internal Server Error");
-//                return Response::json(array('status' => false, 'message' => "Internal Server Error"));
+                if (isset($data['campaignFiles']))
+                    unset($data['campaignFiles']);
+//
+                return Redirect::to('/#submitEntry')->with('errorMessage', "Internal Server Error")->withInput($data);
             }
         } else {
-
-            return Redirect::to('/')->with('message', "Invalid Captch");
-//            return Response::json(array('status' => false, 'message' => "Invalid Captcha"));
+            if (isset($data['campaignFiles']))
+                unset($data['campaignFiles']);
+//
+            return Redirect::to('/#submitEntry')->with('errorMessage', "Invalid Captcha")->withInput($data);
         }
 
     }

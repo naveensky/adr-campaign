@@ -252,7 +252,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
 .ui-tooltip-error .ui-tooltip-content,
 .ui-tooltip-success .ui-tooltip-content,
 .nostalgia-accordion .ui-accordion-header.ui-state-default.ui-state-active a {
-    color: #FFFFFF;
+    color: #FFE993;
 }
 
 ul.list-1 li h5,
@@ -1054,6 +1054,7 @@ ul.social-list li a.social-list-googleplus:hover {
     background-repeat: no-repeat;
     background-position: 0px 0px;
 }
+
 ul.social-list li a.social-list-twitter:hover {
     width: 36px;
     height: 36px;
@@ -1061,6 +1062,7 @@ ul.social-list li a.social-list-twitter:hover {
     background-repeat: no-repeat;
     background-position: 0px 0px;
 }
+
 ul.social-list li a.social-list-facebook:hover {
     width: 36px;
     height: 36px;
@@ -1068,6 +1070,7 @@ ul.social-list li a.social-list-facebook:hover {
     background-repeat: no-repeat;
     background-position: 0px 0px;
 }
+
 /******************************************************************************/
 /*  Latest tweets															  */
 /******************************************************************************/
@@ -1213,22 +1216,60 @@ div.footer div.layout-50-right {
 }
 
 .add_more_button {
-    background-color: white !important;
-    color: #000000 !important;
+
     padding: 5px 10px 5px 10px !important;
     margin-left: 0px !important;
     font-size: 16px !important;
     text-transform: none !important;
 }
 
-.about-list li{
+.about-list li {
     margin-bottom: 30px;
 }
 
-.about-list h3{
+.about-list h3 {
     margin-bottom: 0px;
 }
 
-.nostalgia-accordion p{
+.nostalgia-accordion p {
     padding-top: 0px;
+    font-size: 18px;
+}
+
+.about-list p {
+    font-size: 18px;
+}
+
+.offline-entries p {
+    font-size: 18px;
+}
+
+.button-black {
+    background-color: #110D14 !important;
+}
+
+#newsletter-form-send {
+    background-color: #110D14 !important;
+    color: #FFE993 !important;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+}
+
+#newsletter-form-send:hover {
+    background-color: #110D14 !important;
+    color: #FFC000 !important;
+}
+
+/* Image style */
+#scrollUp {
+    bottom: 20px;
+    right: 20px;
+    height: 38px; /* Height of image */
+    width: 38px; /* Width of image */
+    background: url(/img/top.png) no-repeat;
+}
+
+#twitter-div {
+    min-height: 197px;
 }

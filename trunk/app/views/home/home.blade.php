@@ -55,7 +55,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Voces"/>
     <link rel="stylesheet" type="text/css"
           href="http://fonts.googleapis.com/css?family=Dosis:400,300,200,500,600,700,800"/>
-
+    <link rel="shortcut icon" href="<% URL::to('img/favicon.ico') %>" type="image/x-icon" />
     <script type="text/javascript" src="<% URL::to('theme/script/linkify.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.min.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery-ui.min.js') %>"></script>
@@ -69,6 +69,8 @@
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.infieldlabel.min.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.carouFredSel.packed.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.supersized.shutter.min.js') %>"></script>
+    <script type="text/javascript" src="<% URL::to('js/jquery.smooth-scroll.js') %>"></script>
+    <script type="text/javascript" src="<% URL::to('scrollup-master/js/jquery.scrollUp.min.js') %>"></script>
     <!--    <script src="http://malsup.github.com/jquery.form.js"></script>-->
 
     <script type="text/javascript" src="<% URL::to('theme/script/script.js') %>"></script>
@@ -119,7 +121,6 @@
 <li id="message" class="text-center clear-fix">
     <h4>
         <% Session::get('message') %>
-        <?php Session::forget('message');?>
     </h4>
 </li>
 <!--end message-->
@@ -127,17 +128,19 @@
 <!-- Main -->
 <li class="text-center clear-fix">
 
-    <h1 class="margin-bottom-0">Mera Vote, Mera Desh</h1>
+    <h1 style="" class="margin-bottom-0">Mera Vote, Mera Desh</h1>
 
 
     <p class="subtitle-paragraph margin-top-20 margin-bottom-50 clear-fix">
-        Let’s reclaim our democracy, let’s reclaim our country
-        <!--        <span class="bold">Libero lacus semper massa at sollicitudin dolor magna nulla velit.</span>-->
+        Participate in our National Competition!
+
+        <span class="bold">Let’s reclaim our democracy, let’s reclaim our country</span>
+
     </p>
 
-    <a href="#about" class="button-black">About Competition</a>
+    <a href="#about" id="aboutCompetition" class="button-black">About Competition</a>
 
-    <a href="#submitEntry" class="button-black clear-fix">
+    <a href="#submitEntry" id="submitEntryLink" class="button-black clear-fix">
         Submit Entry
     </a>
 
@@ -155,14 +158,13 @@
 
             <!-- Image -->
             <li>
-                <h3>Monoscope</h3>
+                <h3>CRIME</h3>
 
                 <div>
-                    <a href="<% URL::to('theme/image/_sample/img1.jpg') %>"
+                    <a href="<% URL::to('img/slides/crime slide.jpg') %>"
                        class="preloader overlay-image fancybox-image" rel="gallery-1">
-                        <img src="<% URL::to('theme/image/_sample/img1.jpg') %>" alt=""/>
-                        <span></span>
-                    </a>
+                        <img src="<% URL::to('img/slides/Crime Small.png') %>" alt=""/>
+                        <span></span></a>
 
                     <p>Phasellus urna nulla</p>
                 </div>
@@ -171,14 +173,15 @@
 
             <!-- Image -->
             <li>
-                <h3>Praesent</h3>
+                <h3>Money</h3>
 
                 <div>
-                    <a href="<% URL::to('theme/image/_sample/img3.jpg') %>"
+                    <a href="<% URL::to('img/slides/Money slide.jpg') %>"
                        class="preloader overlay-image fancybox-image" rel="gallery-1">
-                        <img src="<% URL::to('theme/image/_sample/img3.jpg') %>" alt=""/>
+                        <img src="<% URL::to('img/slides/money small.png') %>" alt=""/>
                         <span></span>
                     </a>
+
 
                     <p>Sed in nisl tellus</p>
                 </div>
@@ -187,28 +190,12 @@
 
             <!-- Image -->
             <li>
-                <h3>Suspendisse</h3>
+                <h3>Representation</h3>
 
                 <div>
-                    <a href="<% URL::to('theme/image/_sample/img4.jpg') %>"
+                    <a href="<% URL::to('img/slides/Representation.JPG') %>"
                        class="preloader overlay-image fancybox-image" rel="gallery-1">
-                        <img src="<% URL::to('theme/image/_sample/img4.jpg') %>" alt=""/>
-                        <span></span>
-                    </a>
-
-                    <p>Praesent in augue</p>
-                </div>
-            </li>
-            <!-- /Image -->
-
-            <!-- Image -->
-            <li>
-                <h3>Curabitur</h3>
-
-                <div>
-                    <a href="<% URL::to('theme/image/_sample/img6.jpg') %>"
-                       class="preloader overlay-image fancybox-image" rel="gallery-1">
-                        <img src="<% URL::to('theme/image/_sample/img6.jpg') %>" alt=""/>
+                        <img src="<% URL::to('img/slides/represntation.png') %>" alt=""/>
                         <span></span>
                     </a>
 
@@ -217,30 +204,30 @@
             </li>
             <!-- /Image -->
 
-            <!-- Video -->
+            <!-- Image -->
             <li>
-                <h3>Aenean</h3>
+                <h3>Video</h3>
 
                 <div>
-                    <a href="http://www.youtube.com/embed/Zln9I9IttLA"
-                       class="preloader overlay-video fancybox-video-youtube">
-                        <img src="<% URL::to('theme/image/_sample/img7.jpg') %>" alt=""/>
+                    <a href="http://adrindia.org/media/video-gallery/adr-sabji-hindi" target="_blank"
+                       class="preloader overlay-video ">
+                        <img src="<% URL::to('img/slides/AMIR KHAN VIDEOS JPEG.PNG') %>" alt=""/>
                         <span></span>
                     </a>
 
                     <p>Quam vitae pretium</p>
                 </div>
             </li>
-            <!-- /Video -->
+            <!-- /Image -->
 
             <!-- Video -->
             <li>
-                <h3>Scelerisque</h3>
+                <h3>Milestone</h3>
 
                 <div>
-                    <a href="http://www.youtube.com/embed/6v2L2UGZJAM"
+                    <a href="<% URL::to('img/slides/Milestones.JPG') %>"
                        class="preloader overlay-video fancybox-video-youtube">
-                        <img src="<% URL::to('theme/image/_sample/img8.jpg') %>" alt=""/>
+                        <img src="<% URL::to('img/slides/milestone small.png') %>" alt=""/>
                         <span></span>
                     </a>
 
@@ -250,19 +237,11 @@
             <!-- /Video -->
 
             <!-- Video -->
-            <li>
-                <h3>Elementum</h3>
 
-                <div>
-                    <a href="http://player.vimeo.com/video/1084537"
-                       class="preloader overlay-video fancybox-video-vimeo">
-                        <img src="<% URL::to('theme/image/_sample/img10.jpg') %>" alt=""/>
-                        <span></span>
-                    </a>
+            <!-- /Video -->
 
-                    <p>Fusce nisl sem</p>
-                </div>
-            </li>
+            <!-- Video -->
+
             <!-- /Video -->
 
         </ul>
@@ -505,7 +484,13 @@
 </li>
 <!-- /Features -->
 
-
+<?php $name = Input::old('name');
+$mobile = Input::old('mobile');
+$email = Input::old('email');
+$address = Input::old('address');
+$category = Input::old('category', "");
+$state = Input::old('state', "");
+?>
 <!-- Contact -->
 <li id="submitEntry">
 
@@ -528,26 +513,34 @@
                     <div class="clear-fix">
 
                         <ul class="no-list form-line">
-
+                            @if(Session::has('errorMessage'))
+                            <li id="message" class=" clear-fix" style="padding-bottom: 10px;">
+                                <h4 style="color: white">
+                                    <% Session::get('errorMessage') %>
+                                </h4>
+                            </li>
+                            <!--end message-->
+                            @endif
                             <li class="clear-fix block">
                                 <label for="name">Your Name (required)</label>
-                                <input type="text" name="name" id="name" value=""/>
+                                <input type="text" name="name" id="name" value="<% $name %>"/>
                             </li>
                             <li class="clear-fix block">
                                 <label for="email">Your Email (required)</label>
-                                <input type="text" name="email" id="email" value=""/>
+                                <input type="text" name="email" id="email" value="<% $email %>"/>
                             </li>
                             <li class="clear-fix block">
                                 <label for="mobile">Your Mobile (required)</label>
-                                <input type="text" name="mobile" id="mobile" value=""/>
+                                <input type="text" name="mobile" id="mobile" value="<% $mobile %>"/>
                             </li>
                             <li class="clear-fix block">
                                 <label for="address">Your Address</label>
                                 <textarea name="address" id="address" rows="1"
-                                          cols="1"></textarea>
+                                          cols="1"><% $address %></textarea>
                             </li>
                             <li class="clear-fix block" style="width: 100%">
-                                <select name="state" style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
+                                <select id="state" name="state"
+                                        style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
                                     <option value="" selected="">Select State</option>
                                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -590,7 +583,8 @@
 
                             <li class="clear-fix block" style="width: 100%">
                                 <!--                                <label for="contact-form-mail">Your e-mail</label>-->
-                                <select name="category" style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
+                                <select id="category" name="category"
+                                        style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
                                     <option value="">Select Category</option>
                                     <option value="Slogans">Slogans</option>
                                     <option value="Videos">Videos</option>
@@ -619,7 +613,7 @@
                                 <% Form::captcha()%>
                             </li>
                             <li class="clear-fix block" style="width: 100%">
-                                <input type="submit" class="button" style="width: 100%"
+                                <input id="campaignSubmit" type="submit" class="button" style="width: 100%"
                                        value="Send"/>
                             </li>
 
@@ -646,11 +640,11 @@
         <!-- /Left column -->
 
         <!-- Right column -->
-        <div class="layout-50-right">
+        <div class="layout-50-right offline-entries">
 
             <h3>Offline Entries</h3>
             <br/>
-            <h5>To submit your entries offline, mail at</h5>
+            <h4>To submit your entries offline, mail at</h4>
 
             <p style="padding-bottom: 0px;">Association For Democratic Reforms </p>
 
@@ -664,7 +658,7 @@
 
             <p style="padding-bottom: 0px;padding-top:0px">Landmark: Near Rockland Hospital</p>
             <br/>
-            <h6>For more information or queries call us at</h6>
+            <h4>For more information or queries call us at</h4>
 
             <p style="padding-bottom: 0px">Helpline No. : 91-80103-94248</p>
 
@@ -689,7 +683,7 @@
 <div class="footer layout-50 clear-fix">
 
     <!-- Left column -->
-    <div class="layout-50-left">
+    <div class="layout-50-left" id="twitter-div" >
 
         <h3>Network With Us</h3>
 
@@ -724,8 +718,9 @@
                     <li class="clear-fix block">
                         <label for="newsletter-form-mail">Your e-mail</label>
                         <input name="email" type="text" id="newsletter-form-mail" value=""/>
-                        <input style="height: 100%" type="submit" id="newsletter-form-send" name="newsletter-form-send"
-                               class="button"
+                        <input style="border-color: #000000;height: 100%;" type="submit" id="newsletter-form-send"
+                               name="newsletter-form-send"
+                               class=""
                                value="Join"/>
                     </li>
 
@@ -751,10 +746,26 @@
 
     //code for adding
     $(document).ready(function () {
+
+        $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            topDistance: '300', // Distance from top before showing element (px)
+            topSpeed: 300, // Speed back to top (ms)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '', // Text for element
+            activeOverlay: false // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+        });
+
+
         setTimeout(function () {
             $('#message').hide();
         }, 10000);
-
+        var state = "<%$state%>";
+        var category = "<%$category%>";
+        $("#state").val(state);
+        $("#category").val(category);
         $('#addMore').click(function (e) {
             e.preventDefault();
             var count = $(this).data('count');
@@ -768,52 +779,43 @@
             $('#addFilesDiv').append(text);
         });
 
-        var bar = $('.bar');
-        var percent = $('.percent');
-        var status = $('#status');
-        //svar progressDiv = $('.progress')
-//        $('#campaignForm').ajaxForm({
-//
-//            beforeSend: function () {
-//                if ($('.file_input').val().length)
-//                    progressDiv.show();
-//                status.empty();
-//                var percentVal = '0%';
-//                bar.width(percentVal)
-//                percent.html(percentVal);
-//            },
-//            uploadProgress: function (event, position, total, percentComplete) {
-//                var percentVal = percentComplete + '%';
-//                bar.width(percentVal)
-//                percent.html(percentVal);
-//            },
-//            success: function (data) {
-//                if (data.status == true) {
-//                    window.location.reload();
-//                } else {
-//                    var errorMessageDiv = $('#errorMessage');
-//                    errorMessageDiv.html('<p>' + data.message + '</p>')
-//                    errorMessageDiv.show();
-//                    setTimeout(function () {
-//                        errorMessageDiv.hide();
-//                    }, 3000);
-//                }
-////                alert(data);
-////                var percentVal = '100%';
-////                bar.width(percentVal)
-////                percent.html(percentVal);
-//            },
-//            complete: function (data) {
-////                if (data.status == true) {
-////                    window.location.reload();
-////                } else {
-////                    var messageUl = $('#message');
-////                    messageUl.html('<h4>' + data.message + '</h4>')
-////                    messageUl.show();
-////                }
-//            }
-//        });
-    });
+        $(".file_input").change(function () {
+            var iSize = ($(this)[0].files[0].size / 1024);
+
+
+            iSize = (Math.round((iSize / 1024) * 100) / 100);
+
+            if (iSize > 100) {
+                console.log('File size exceeded');
+
+            } else {
+                console.log(iSize);
+            }
+
+        });
+
+        $('#campaignSubmit').click(function (e) {
+            $(this).hide();
+            var errorDiv = $('$errorMessage');
+            errorDiv.show();
+            errorDiv.html('<p>' + "Please Wait" + '</p>')
+
+        });
+
+        $('#aboutCompetition').click(function (e) {
+
+            e.preventDefault();
+            $.smoothScroll({scrollTarget: '#about'});
+        });
+        $('#submitEntryLink').click(function (e) {
+
+            e.preventDefault();
+            $.smoothScroll({scrollTarget: '#submitEntry'});
+        });
+
+
+    })
+
 
 
 </script>

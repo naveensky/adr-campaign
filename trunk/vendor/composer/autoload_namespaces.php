@@ -37,4 +37,5 @@ return array(
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'ClassPreloader' => array($vendorDir . '/classpreloader/classpreloader/src'),
     'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
+    'Barryvdh\\VendorCleanup' => array($vendorDir . '/barryvdh/laravel-vendor-cleanup/src'),
 );
