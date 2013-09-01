@@ -55,7 +55,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Voces"/>
     <link rel="stylesheet" type="text/css"
           href="http://fonts.googleapis.com/css?family=Dosis:400,300,200,500,600,700,800"/>
-    <link rel="shortcut icon" href="<% URL::to('img/favicon.ico') %>" type="image/x-icon" />
+    <link rel="shortcut icon" href="<% URL::to('img/favicon.ico') %>" type="image/x-icon"/>
     <script type="text/javascript" src="<% URL::to('theme/script/linkify.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery.min.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/jquery-ui.min.js') %>"></script>
@@ -76,8 +76,8 @@
     <script type="text/javascript" src="<% URL::to('theme/script/script.js') %>"></script>
     <script type="text/javascript" src="<% URL::to('theme/script/main.js') %>"></script>
 
-    <%HTML::script('js/jquery.validate.min.js')%>
-    <%HTML::script('js/additional-methods.min.js')%>
+    <% HTML::script('js/jquery.validate.min.js') %>
+    <% HTML::script('js/additional-methods.min.js') %>
 
 </head>
 
@@ -166,7 +166,7 @@
                         <img src="<% URL::to('img/slides/Crime Small.png') %>" alt=""/>
                         <span></span></a>
 
-                    <p>Phasellus urna nulla</p>
+                    <p>&nbsp;</p>
                 </div>
             </li>
             <!-- /Image -->
@@ -183,7 +183,7 @@
                     </a>
 
 
-                    <p>Sed in nisl tellus</p>
+                    <p>&nbsp;</p>
                 </div>
             </li>
             <!-- /Image -->
@@ -199,7 +199,7 @@
                         <span></span>
                     </a>
 
-                    <p>Nam nisi mauris</p>
+                    <p>&nbsp;</p>
                 </div>
             </li>
             <!-- /Image -->
@@ -215,7 +215,7 @@
                         <span></span>
                     </a>
 
-                    <p>Quam vitae pretium</p>
+                    <p>&nbsp;</p>
                 </div>
             </li>
             <!-- /Image -->
@@ -231,7 +231,7 @@
                         <span></span>
                     </a>
 
-                    <p>Quam vitae blandit</p>
+                    <p>&nbsp;</p>
                 </div>
             </li>
             <!-- /Video -->
@@ -513,14 +513,17 @@ $state = Input::old('state', "");
                     <div class="clear-fix">
 
                         <ul class="no-list form-line">
+
                             @if(Session::has('errorMessage'))
                             <li id="message" class=" clear-fix" style="padding-bottom: 10px;">
                                 <h4 style="color: white">
                                     <% Session::get('errorMessage') %>
                                 </h4>
                             </li>
+
                             <!--end message-->
                             @endif
+
                             <li class="clear-fix block">
                                 <label for="name">Your Name (required)</label>
                                 <input type="text" name="name" id="name" value="<% $name %>"/>
@@ -585,7 +588,6 @@ $state = Input::old('state', "");
                                 <!--                                <label for="contact-form-mail">Your e-mail</label>-->
                                 <select id="category" name="category"
                                         style="width: 100%;font-family: Dosis, Arial;font-size: 16px;">
-                                    <option value="">Select Category</option>
                                     <option value="Slogans">Slogans</option>
                                     <option value="Videos">Videos</option>
                                     <option value="Songs">Songs</option>
@@ -595,7 +597,9 @@ $state = Input::old('state', "");
                             </li>
                             <li class="clear-fix block" style="width: 100%">
                                 <div id="addFilesDiv">
-                                    <input style="width: 100%" type="file" id="campaignFiles" class="file_input"
+                                    <p style="color: white;padding: 0px;" id="allowedTypes">Allowed types: jpg, jpeg,
+                                        gif, png, tiff, ico</p>
+                                    <input style="width: 100%;padding-left: 0px;color: white;border: none;background: none" type="file" id="campaignFiles" class="file_input"
                                            name="campaignFiles[]">
 
                                 </div>
@@ -610,24 +614,26 @@ $state = Input::old('state', "");
 
                             </li>
                             <li class="clear-fix block" style="width: 100%">
-                                <% Form::captcha()%>
+                                <% Form::captcha() %>
                             </li>
                             <li class="clear-fix block" style="width: 100%">
                                 <input id="campaignSubmit" type="submit" class="button" style="width: 100%"
-                                       value="Send"/>
+                                       value="Submit Your Entry"/>
                             </li>
-
-                            <li class="clear-fix block" style="width: 100%">
-                                <div style="display: none;width: 100%" class="progress">
-                                    <div class="bar"></div>
-                                    <div class="percent">0%</div>
-                                </div>
-                            </li>
-                            <li class="clear-fix block" style="width: 100%">
-                                <div style="display: none;width: 100%" id="errorMessage">
+                            <li style="color: white;" class=" clear-fix">
+                                <div style="padding-bottom: 10px;" id="errorMessage" style="display: none">
 
                                 </div>
                             </li>
+
+                            <li class=" clear-fix" id="submitMessage" style="display: none;color: white;">
+                                <div style="padding-bottom: 10px;">
+                                    <p>Thanks for submitting your entry, please wait <span
+                                            style="padding-left: 10px;"><img src="<% URL::to('img/loader.gif') %>"
+                                                                             alt=""></span></p>
+                                </div>
+                            </li>
+
                         </ul>
 
                     </div>
@@ -683,7 +689,7 @@ $state = Input::old('state', "");
 <div class="footer layout-50 clear-fix">
 
     <!-- Left column -->
-    <div class="layout-50-left" id="twitter-div" >
+    <div class="layout-50-left" id="twitter-div">
 
         <h3>Network With Us</h3>
 
@@ -779,51 +785,140 @@ $state = Input::old('state', "");
             $('#addFilesDiv').append(text);
         });
 
-        $(".file_input").change(function () {
-            var iSize = ($(this)[0].files[0].size / 1024);
+        $(".file_input").live("change", function (e) {
+            if (!$(this).val()) {
+                $(this).removeClass('error');
+                return;
+            }
+            $(this).removeClass().addClass('file_input');
+            var ext = $(this).val().split('.').pop().toLowerCase();
+            var category = $.trim($("#category option:selected").val());
+            var allowedTypes = null;
+            var fileTypes = "";
+            if (category == "Slogans" || category == "Cartoons" || category == "Photographs") {
 
-
-            iSize = (Math.round((iSize / 1024) * 100) / 100);
-
-            if (iSize > 100) {
-                console.log('File size exceeded');
-
-            } else {
-                console.log(iSize);
+                fileTypes = "jpg, jpeg, gif, png, tiff, ico";
+                allowedTypes = new Array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'ico');
+            } else if (category == "Videos") {
+                allowedTypes = new Array('mp4', 'mov', 'avi', 'mpeg', 'wmv');
+                fileTypes = "mp4, mov, avi, mpeg, wmv";
+            }
+            else {
+                allowedTypes = new Array('mp3', 'wav', 'amr');
+                fileTypes = " mp3, wav, amr";
             }
 
+            var errorDiv = $('#errorMessage');
+            if (jQuery.inArray(ext, allowedTypes) == -1) {
+                errorDiv.show();
+                $(this).addClass('error');
+                errorDiv.html('<p>' + 'Invalid file extension, only ' + fileTypes + '</p>');
+                return;
+
+            }
+            var iSize = ($(this)[0].files[0].size / 1024);
+            iSize = (Math.round((iSize / 1024) * 100) / 100);
+
+            if (iSize > 1) {
+                $(this).addClass('error');
+                errorDiv.show();
+                errorDiv.html('<p>File size must be less than 100mb</p>');
+            } else {
+                errorDiv.show();
+                errorDiv.html('<p></p>');
+            }
         });
 
         $('#campaignSubmit').click(function (e) {
-            $(this).hide();
-            var errorDiv = $('$errorMessage');
-            errorDiv.show();
-            errorDiv.html('<p>' + "Please Wait" + '</p>')
 
+            var errorDiv = $('#errorMessage');
+            errorDiv.show();
+            var fileInput = $('.file_input');
+            var isValidFiles = true;
+            fileInput.each(function () {
+                var $this = $(this);
+                if ($this.hasClass('error')) {
+
+                    errorDiv.html('<p>' + "Invalid file attached, please select other file or remove " + $this.val() + '</p>');
+                    isValidFiles = false;
+                    return false;
+                } else {
+                    isValidFiles = true;
+                }
+            });
+            if (!isValidFiles) {
+                e.preventDefault();
+                return;
+            }
+//
+            var name = $.trim($('#name').val());
+            var email = $.trim($('#email').val());
+            var mobile = $.trim($('#mobile').val());
+            if (!isValidEmailAddress(email)) {
+                e.preventDefault();
+                errorDiv.html('<p>' + "Invalid Email" + '</p>');
+                return;
+            }
+            if (!validatePhone(mobile)) {
+                e.preventDefault();
+                errorDiv.html('<p>' + "Invalid Mobile" + '</p>');
+                return;
+            }
+            if (!name) {
+                e.preventDefault();
+                errorDiv.html('<p>' + "Name required" + '</p>');
+                return;
+            }
+            $('#submitMessage').show();
+            $(this).hide();
         });
 
         $('#aboutCompetition').click(function (e) {
-
             e.preventDefault();
             $.smoothScroll({scrollTarget: '#about'});
         });
-        $('#submitEntryLink').click(function (e) {
 
+        $('#submitEntryLink').click(function (e) {
             e.preventDefault();
             $.smoothScroll({scrollTarget: '#submitEntry'});
         });
+        $('#category').on('change', function () {
+            var category = $(this).val();
+            var fileTypes = "";
+            if (category == "Songs") {
+                fileTypes = " mp3, wav, amr";
+            } else if (category == "Videos") {
+                fileTypes = "mp4, mov, avi, mpeg, wmv";
+            }
+            else {
+                fileTypes = "jpg, jpeg, gif, png, tiff, ico";
+            }
+            $('#allowedTypes').html('Allowed types ' + fileTypes);
+        });
+    });
+    function isValidEmailAddress(emailAddress) {
+        if (!emailAddress)
+            return false;
+        var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+        return pattern.test(emailAddress);
+    }
 
+    function validatePhone(txtPhone) {
+        if (!txtPhone)
+            return false;
+        var filter = /^\d{10}$/;
+        return filter.test(txtPhone);
 
-    })
-
+    }
 
 
 </script>
 <div id="addFileInput" style="display: none">
     <br/>
 
-    <input type="file" class="file_input" id="campaignFiles" name="campaignFiles[]">
+    <input style="padding-left: 0px;color: white;border: none;background: none" type="file" class="file_input" id="campaignFiles" name="campaignFiles[]">
 </div>
 </body>
+
 
 </html>

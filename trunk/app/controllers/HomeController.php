@@ -43,46 +43,81 @@ class HomeController extends BaseController
         $rules = array(
             'recaptcha_response_field' => 'required|recaptcha',
         );
+
         $v = Validator::make($data, $rules);
         if ($v->passes()) {
-            try {
+            $rules = array(
+                'email' => 'required|email',
+            );
+            $v = Validator::make($data, $rules);
+            if ($v->passes()) {
+                try {
+                    $validExtensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'ico', 'mp3', 'wav', 'amr', 'mp4',
+                        'mov', 'avi', 'mpeg', 'wmv');
+                    $campaignFiles = $data['campaignFiles'];
+                    $isFileUploaded = false;
+                    $isFileSizeExceeded = false;
+                    $isInvalidExtensionValid = false;
+                    foreach ($campaignFiles as $file) {
 
+                        if (!empty($file)) {
 
-                $campaignFiles = $data['campaignFiles'];
-                $isFileUploaded = false;
-                foreach ($campaignFiles as $file) {
-                    if (!empty($file)) {
-                        $isFileUploaded = true;
-                        break;
+                            $isFileUploaded = true;
+                            if ($file->getClientSize() > 104857600) {
+                                $isFileSizeExceeded = true;
+                                break;
+                            }
+                            if (!in_array($file->getClientOriginalExtension(), $validExtensions)) {
+                                $isInvalidExtensionValid = true;
+                                break;
+                            }
+                        }
                     }
-                }
-                if (!$isFileUploaded) {
-                    if (isset($data['campaignFiles']))
-                        unset($data['campaignFiles']);
+                    if ($isInvalidExtensionValid) {
+                        if (isset($data['campaignFiles']))
+                            unset($data['campaignFiles']);
+                        return Redirect::to('/#submitEntry')->with('errorMessage', "Invalid file extension")->withInput($data)->with('status');
+                    }
+                    if (!$isFileUploaded) {
+                        if (isset($data['campaignFiles']))
+                            unset($data['campaignFiles']);
 //                    return Response::json(array('status' => false, 'message' => "Atleast one file is required"));
-                    return Redirect::to('/#submitEntry')->with('errorMessage', "Atleast one file is required")->withInput($data)->with('status');
-                }
-                if (empty($data['name']) || empty($data['email']) || empty($data['mobile'])) {
+                        return Redirect::to('/#submitEntry')->with('errorMessage', "Atleast one file is required")->withInput($data)->with('status');
+                    }
+                    if ($isFileSizeExceeded) {
+                        if (isset($data['campaignFiles']))
+                            unset($data['campaignFiles']);
+                        return Redirect::to('/#submitEntry')->with('errorMessage', "File size exceeded , 100mb limit exceeded")->withInput($data)->with('status');
+                    }
+                    if (empty($data['name']) || empty($data['mobile'])) {
+                        if (isset($data['campaignFiles']))
+                            unset($data['campaignFiles']);
+//
+                        return Redirect::to('/#submitEntry')->with('errorMessage', "Please fill required fields")->withInput($data);
+                    }
+
+                    $address = empty($data['address']) ? '' : $data['address'];
+                    $city = empty($data['city']) ? '' : $data['city'];
+                    $state = empty($data['state']) ? '' : $data['state'];
+                    $category = empty($data['category']) ? "None" : $data['category'];
+                    $this->campaignService->addCampaign($data['name'], $data['email'], $data['mobile'], $address, $city, $state, $category, $campaignFiles);
+                    $this->emailService->sendEmail(array('userName' => $data['name'], 'userEmail' => $data['email']));
+                    return Redirect::to('/')->with('message', "Thank you for submitting your entry. Please see your email for more details.");
+
+                } catch (Exception $e) {
                     if (isset($data['campaignFiles']))
                         unset($data['campaignFiles']);
 //
-                    return Redirect::to('/#submitEntry')->with('errorMessage', "Please fill required fields")->withInput($data);
+                    return Redirect::to('/#submitEntry')->with('errorMessage', "Internal Server Error")->withInput($data);
                 }
-
-                $address = empty($data['address']) ? '' : $data['address'];
-                $city = empty($data['city']) ? '' : $data['city'];
-                $state = empty($data['state']) ? '' : $data['state'];
-                $category = empty($data['category']) ? "None" : $data['category'];
-                $this->campaignService->addCampaign($data['name'], $data['email'], $data['mobile'], $address, $city, $state, $category, $campaignFiles);
-                $this->emailService->sendEmail(array('userName' => $data['name'], 'userEmail' => $data['email']));
-                return Redirect::to('/')->with('message', "Thank you for submitting your entry. Please see your email for more details.");
-
-            } catch (Exception $e) {
+            } else {
                 if (isset($data['campaignFiles']))
                     unset($data['campaignFiles']);
 //
-                return Redirect::to('/#submitEntry')->with('errorMessage', "Internal Server Error")->withInput($data);
+                return Redirect::to('/#submitEntry')->with('errorMessage', "Invalid Email")->withInput($data);
+
             }
+
         } else {
             if (isset($data['campaignFiles']))
                 unset($data['campaignFiles']);
