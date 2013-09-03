@@ -8,29 +8,6 @@
     <meta name="fragment" content="!"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <style type="text/css">
-        .progress {
-            position: relative;
-            width: 400px;
-            border: 1px solid #ddd;
-            padding: 1px;
-            border-radius: 3px;
-        }
-
-        .bar {
-            background-color: #B4F5B4;
-            width: 0%;
-            height: 20px;
-            border-radius: 3px;
-        }
-
-        .percent {
-            position: absolute;
-            display: inline-block;
-            top: 3px;
-            left: 48%;
-        }
-    </style>
     <link rel="stylesheet" type="text/css" href="<% URL::to('theme/style/jquery.qtip.css') %>"/>
     <link rel="stylesheet" type="text/css" href="<% URL::to('theme/style/jquery-ui/jquery-ui.css') %>"/>
     <link rel="stylesheet" type="text/css" href="<% URL::to('theme/style/supersized/supersized.css') %>"/>
@@ -209,8 +186,9 @@
                 <h3>Video</h3>
 
                 <div>
-                    <a href="http://adrindia.org/media/video-gallery/adr-sabji-hindi" target="_blank"
-                       class="preloader overlay-video ">
+
+                    <a href="http://www.youtube.com/embed/bbtPb5KIxF0"
+                       class="preloader overlay-video fancybox-video-vimeo">
                         <img src="<% URL::to('img/slides/AMIR KHAN VIDEOS JPEG.PNG') %>" alt=""/>
                         <span></span>
                     </a>
@@ -222,7 +200,7 @@
 
             <!-- Video -->
             <li>
-                <h3>Milestone</h3>
+                <h3>Milestones</h3>
 
                 <div>
                     <a href="<% URL::to('img/slides/Milestones.JPG') %>"
@@ -508,7 +486,7 @@ $state = Input::old('state', "");
 
                 <!-- Contact form -->
                 <form name="contact-form" id="campaignForm" method="post" enctype="multipart/form-data"
-                      action="<% URL::to('/campaign/add') %>" class="clear-fix">
+                      action="<% URL::to('/add') %>" class="clear-fix">
 
                     <div class="clear-fix">
 
@@ -599,8 +577,10 @@ $state = Input::old('state', "");
                                 <div id="addFilesDiv">
                                     <p style="color: white;padding: 0px;" id="allowedTypes">Allowed types: jpg, jpeg,
                                         gif, png, tiff, ico</p>
-                                    <input style="width: 100%;padding-left: 0px;color: white;border: none;background: none" type="file" id="campaignFiles" class="file_input"
-                                           name="campaignFiles[]">
+                                    <input
+                                        style="width: 100%;padding-left: 0px;color: white;border: none;background: none"
+                                        type="file" id="campaignFiles" class="file_input"
+                                        name="campaignFiles[]">
 
                                 </div>
 
@@ -790,6 +770,8 @@ $state = Input::old('state', "");
                 $(this).removeClass('error');
                 return;
             }
+
+
             $(this).removeClass().addClass('file_input');
             var ext = $(this).val().split('.').pop().toLowerCase();
             var category = $.trim($("#category option:selected").val());
@@ -809,6 +791,7 @@ $state = Input::old('state', "");
             }
 
             var errorDiv = $('#errorMessage');
+            $(this).replaceWith($('#campaignFileInput').clone());
             if (jQuery.inArray(ext, allowedTypes) == -1) {
                 errorDiv.show();
                 $(this).addClass('error');
@@ -819,7 +802,7 @@ $state = Input::old('state', "");
             var iSize = ($(this)[0].files[0].size / 1024);
             iSize = (Math.round((iSize / 1024) * 100) / 100);
 
-            if (iSize > 1) {
+            if (iSize > 100) {
                 $(this).addClass('error');
                 errorDiv.show();
                 errorDiv.html('<p>File size must be less than 100mb</p>');
@@ -827,6 +810,7 @@ $state = Input::old('state', "");
                 errorDiv.show();
                 errorDiv.html('<p></p>');
             }
+
         });
 
         $('#campaignSubmit').click(function (e) {
@@ -916,7 +900,8 @@ $state = Input::old('state', "");
 <div id="addFileInput" style="display: none">
     <br/>
 
-    <input style="padding-left: 0px;color: white;border: none;background: none" type="file" class="file_input" id="campaignFiles" name="campaignFiles[]">
+    <input style="padding-left: 0px;color: white;border: none;background: none" type="file" class="file_input"
+           id="campaignFileInput" name="campaignFiles[]">
 </div>
 </body>
 

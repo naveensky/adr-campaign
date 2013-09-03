@@ -14,6 +14,7 @@ return array(
     'CampaignFilesService' => $baseDir . '/app/libraries/services/CampaignFilesService.php',
     'CampaignRepository' => $baseDir . '/app/libraries/repositories/CampaignRepository.php',
     'CampaignService' => $baseDir . '/app/libraries/services/CampaignService.php',
+    'Constants' => $baseDir . '/app/libraries/Constants.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'EmailService' => $baseDir . '/app/libraries/services/EmailService.php',
     'ErrorController' => $baseDir . '/app/controllers/ErrorController.php',
@@ -24,5 +25,6 @@ return array(
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'TwitterController' => $baseDir . '/app/controllers/TwitterController.php',
     'User' => $baseDir . '/app/models/User.php',
+    'UserController' => $baseDir . '/app/controllers/UserController.php',
     'Util' => $baseDir . '/app/libraries/Util.php',
 );

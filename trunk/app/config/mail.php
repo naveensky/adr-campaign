@@ -54,7 +54,8 @@ return array(
 	|
 	*/
 
-    'from' => array('address' => 'campaign@adrindia.org', 'name' => 'ADR-India'),
+//    'from' => array('address' => 'campaign@adrindia.org', 'name' => 'ADR-India'),
+    'from' => array('address' => 'kashta@greenapplesolutions.com', 'name' => 'Keshav Ashta'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +81,7 @@ return array(
 	|
 	*/
 
-    'username' => 'campaign@adrindia.org',
+    'username' => 'kashta@greenapplesolutions.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => 'theanimorphs',
+	'password' => 'YAHOO.CO.IN',
 
 	/*
 	|--------------------------------------------------------------------------

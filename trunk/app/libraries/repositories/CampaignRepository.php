@@ -49,4 +49,19 @@ class CampaignRepository
         }
     }
 
+    public function getCampaigns($name, $registrationNumber)
+    {
+        try {
+            $query = Campaign::orderBy('created_at', 'desc');
+             if (!is_null($name))
+                $query->where('name', 'like', $name . '%');
+             if(!is_null($registrationNumber))
+                $query->where('registrationNumber', '=', $registrationNumber);
+
+            return $query->with('campaignFiles')->paginate(Constants::PAGE_COUNT);
+        } catch (Exception $e) {
+            Log::error($e);
+            throw $e;
+        }
+    }
 }

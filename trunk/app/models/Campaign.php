@@ -12,5 +12,10 @@ class Campaign extends Eloquent
 
     protected $table = 'campaigns';
 
+    public function campaignFiles()
+    {
+        return $this->hasMany('CampaignFile','campaignId');
+    }
+
 
 }

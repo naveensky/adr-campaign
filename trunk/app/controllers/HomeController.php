@@ -27,13 +27,27 @@ class HomeController extends BaseController
     public function getIndex()
 
     {
-        Form::captcha();
+
         try {
             return View::make('home.home');
         } catch (Exception $e) {
             return Redirect::to('error')->with('message', "Internal Server Error");
         }
 
+    }
+
+    public function getDashboard()
+    {
+        try {
+            $data = Input::all();
+            $name = empty($data['name']) ? null : $data['name'];
+            $registrationNumber = empty($data['registrationNumber']) ? null : $data['registrationNumber'];
+            $campaign = $this->campaignService->getCampaigns($name, $registrationNumber);
+
+            return View::make('home.dashboard')->with('campaigns', $campaign)->with('name', $name)->with('registrationNumber', $registrationNumber);
+        } catch (Exception $e) {
+            return Redirect::to('error')->with('message', "Internal Server Error");
+        }
     }
 
 

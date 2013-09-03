@@ -12,8 +12,8 @@
 */
 
 
-Route::get("/", array('as' => 'home', 'uses' => 'HomeController@getIndex'));
-Route::controller('campaign', 'HomeController');
+
+Route::controller('user', 'UserController');
 Route::get('/error', 'ErrorController@getIndex');
 
 Route::get('/twitter', function () {
@@ -24,7 +24,7 @@ Route::get('/twitter', function () {
     echo json_encode($tweets);
     exit;
 });
-
+Route::controller("/", 'HomeController');
 Route::get('/file', function () {
     return View::make('home.homebcp');
 });

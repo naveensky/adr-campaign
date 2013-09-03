@@ -44,4 +44,13 @@ class CampaignService
         return $fileUploadingErrors;
     }
 
+    public function getCampaigns($name = null, $registrationNumber = null)
+    {
+        try {
+            return $this->campaignRepo->getCampaigns($name, $registrationNumber);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
 }

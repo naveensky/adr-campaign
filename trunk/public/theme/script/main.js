@@ -136,14 +136,14 @@ $(document).ready(function () {
     $('.fancybox-video-youtube').bind('click', function () {
         $.fancybox(
             {
-                'padding': 10,
-                'autoScale': false,
-                'transitionIn': 'none',
-                'transitionOut': 'none',
-                'width': '90%',
-                'height': '90%',
-                'href': this.href,
-                'type': 'iframe'
+                'padding'		: 10,
+                'autoScale'		: false,
+                'transitionIn'	: 'none',
+                'transitionOut'	: 'none',
+                'width'			: '90%',
+                'height'		: '90%',
+                'href'			: this.href,
+                'type'			: 'iframe'
             });
 
         return false;
@@ -156,16 +156,14 @@ $(document).ready(function () {
     $('.fancybox-video-vimeo').bind('click', function () {
         $.fancybox(
             {
-                'margin': 0,
-                'padding': 0,
-                'autoScale': false,
-                'transitionIn': 'none',
-                'transitionOut': 'none',
-                'title': this.title,
-                'width': '90%',
-                'height': '90%',
-                'href': this.href,
-                'type': 'iframe'
+                'padding'		: 10,
+                'autoScale'		: false,
+                'transitionIn'	: 'none',
+                'transitionOut'	: 'none',
+                'width'			: '90%',
+                'height'		: '90%',
+                'href'			: this.href,
+                'type'			: 'iframe'
             });
 
         return false;
